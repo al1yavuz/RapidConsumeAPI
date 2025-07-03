@@ -48,7 +48,7 @@ This project is structured using a layered architecture:
 ## 📁 Project Setup
 
 ```bash
-+ git clone https://github.com/al1yavuz/RapidConsumeAPI.git
+git clone https://github.com/al1yavuz/RapidConsumeAPI.git
 cd RapidConsumeAPI
 dotnet restore
 dotnet ef database update
