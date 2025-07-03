@@ -9,7 +9,8 @@ The project follows **Clean Architecture** and uses DTOs, AutoMapper, and Identi
 
 This project is structured using a layered architecture:
 
-![Architecture](./architecture.png)
+![Architecture](![architecture](https://github.com/user-attachments/assets/a5dbc838-77e0-48c1-a73f-0ea3a2244c71)
+
 
 **Layers:**
 - `Entity Layer`: Defines core entities (Room, Staff, Service, etc.)
