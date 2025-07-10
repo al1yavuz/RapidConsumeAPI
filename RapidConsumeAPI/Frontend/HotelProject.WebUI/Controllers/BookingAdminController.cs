@@ -1,4 +1,5 @@
-﻿using HotelProject.WebUI.Dtos.BookingDto;
+﻿using System.Text;
+using HotelProject.WebUI.Dtos.BookingDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -15,13 +16,25 @@ namespace HotelProject.WebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var client = _httpClientFactory.CreateClient(); //consume edilmesi için istemci oluşturdum.
-            var responseMessage = await client.GetAsync("http://localhost:5093/api/Booking");//daha sonra bu adrese istekte bulundum.
-            if (responseMessage.IsSuccessStatusCode) //eğer adresten başarılı bir durum kodu dönerse gelen veriyi jsonData değişkenine atadım
+            var client = _httpClientFactory.CreateClient(); 
+            var responseMessage = await client.GetAsync("http://localhost:5093/api/Booking");
+            if (responseMessage.IsSuccessStatusCode) 
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultBookingDto>>(jsonData);
                 return View(values);
+            }
+            return View();
+        }
+        public async Task<IActionResult> ApprovedReservation(ApprovedReservationDto approvedReservationDto)
+        {           
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(approvedReservationDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("http://localhost:5093/api/Booking/bbbbb", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
             }
             return View();
         }
